@@ -3,14 +3,15 @@
 <head>
 </head>
 <body>
-    <script type="module">
-      import { BSON, EJSON, ObjectId } from './lib/bson.mjs';
+    <input></input>
 
-      const bytes = BSON.serialize({ _id: new ObjectId() });
-      console.log(bytes);
-      const doc = BSON.deserialize(bytes);
-      console.log(EJSON.stringify(doc));
-      // {"_id":{"$oid":"..."}}
+    <script type="module">
+        import { BSON, EJSON, ObjectId } from './node_modules/bson';
+
+        const bytes = BSON.serialize({ _id: new ObjectId() });
+        console.log(bytes);
+        const doc = BSON.deserialize(bytes);
+        console.log(EJSON.stringify(doc));
     </script>
 </body>
 </html>
