@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-</head>
+<html>
+<script type="module" crossorigin src="/assets/index-DjdhC4jD.js"></script>
+
 <body>
-    <input></input>
-
-    <script type="module">
-        import { BSON, EJSON, ObjectId } from './node_modules/bson';
-
-        const bytes = BSON.serialize({ _id: new ObjectId() });
-        console.log(bytes);
-        const doc = BSON.deserialize(bytes);
-        console.log(EJSON.stringify(doc));
-    </script>
+  <input type="text" id="input" placeholder="Base62 string">
+  <button id="btn">Convert</button>
+  <div id="output"></div>
 </body>
 </html>
