@@ -1,0 +1,7 @@
+*.json
+
+dev/*
+dist/*
+node_modules/*
+
+!.github
