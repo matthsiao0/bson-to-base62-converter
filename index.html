@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <script type="module">
+      import { BSON, EJSON, ObjectId } from './lib/bson.mjs';
+
+      const bytes = BSON.serialize({ _id: new ObjectId() });
+      console.log(bytes);
+      const doc = BSON.deserialize(bytes);
+      console.log(EJSON.stringify(doc));
+      // {"_id":{"$oid":"..."}}
+    </script>
+</body>
+</html>
