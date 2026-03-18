@@ -1,18 +1,25 @@
 import { ObjectId } from 'bson';
 import base62 from 'base-x';
 
-const b62 = base62('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+const PYTHON_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const b62 = base62(PYTHON_ALPHABET);
 
-document.getElementById('btn').onclick = () => {
-    const str = document.getElementById('input').value;
-    const bytes = b62.decode(str);
+function processB62ToBson(text) {
+    const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
 
-    console.log(bytes)
+    const results = lines.map(str => {
+        try {
+            const decoded = b62.decode(str);
+            const hex = Array.from(decoded)
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('')
+                .padStart(24, '0');
+            
+            return new ObjectId(hex).toString(); 
+        } catch (e) {
+            return `Error: Invalid input "${str}"`;
+        }
+    });
 
-    const hex = Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
-
-    const paddedHex = hex.padStart(24, '0');
-    const oid = new ObjectId(paddedHex);
-
-    document.getElementById('output').innerText = oid.toString();
-};
+    return results;
+}
