@@ -32,6 +32,21 @@
             return results;
         }
 
+        function bsonToBase62(objectIdStr) {
+            try {
+                const hex = objectIdStr.trim();
+                if (hex.length !== 24) throw new Error("Invalid BSON length");
+
+                const bytes = new Uint8Array(
+                    hex.match(/.{1,2}/g).map(byte => parseInt(byte, 16))
+                );
+
+                return b62.encode(bytes);
+            } catch (e) {
+                return `Error: ${e.message}`;
+            }
+        }
+
         document.getElementById('convertBtn').onclick = () => {
             const rawText = document.getElementById('multiInput').value;
             const results = processB62ToBson(rawText);
