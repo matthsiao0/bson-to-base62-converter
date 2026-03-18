@@ -11,7 +11,7 @@ document.getElementById('btn').onclick = () => {
 
     const hex = Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
 
-    const finalHex = ('6' + hex.padStart(24, '0').substring(1)).slice(0, 24);
+    const paddedHex = hex.padStart(24, '0');
     const oid = new ObjectId(finalHex);
 
     document.getElementById('output').innerText = oid.toString();
