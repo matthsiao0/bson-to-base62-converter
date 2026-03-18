@@ -12,7 +12,7 @@ document.getElementById('btn').onclick = () => {
     const hex = Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
 
     const paddedHex = hex.padStart(24, '0');
-    const oid = new ObjectId(finalHex);
+    const oid = new ObjectId(paddedHex);
 
     document.getElementById('output').innerText = oid.toString();
 };
